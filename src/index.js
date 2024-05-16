@@ -1,4 +1,6 @@
-import "./styles.css";
-import { screenController } from "./uiControls";
+// import "./styles.css";
+// import { screenController } from "./uiControls";
 
-screenController();
+// screenController();
+import { create, getListbyId } from "./List";
+

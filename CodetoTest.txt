@@ -1,5 +1,13 @@
-import { saveToLocalStorage,getFromLocalStorage } from "./localStorage";
- let lists = getFromLocalStorage( ) || []; 
+
+const localStorageKey = "lists"; 
+function saveToLocalStorage(lists){
+    localStorage.setItem(localStorageKey,JSON.stringify(lists));
+}
+function getFromLocalStorage(){
+    const data = JSON.parse(localStorage.getItem(localStorageKey));
+    return data ;// return object which contains object 
+}
+let lists = getFromLocalStorage( ) || []; 
  const List = (name)=>{
     let id =  Date.now().toString() ; 
     let todo = [];
@@ -36,6 +44,3 @@ const deleteList = (listid)=>{
 //  getid 
 const getIndexbyId = (listId)=> lists.findIndex((element)=>element.id === listId);
 const getListbyId = (lisId)=> lists.find((listObject)=> listObject.id === lisId);
-
-// get index
-export {create,getListbyId,deleteList,updateName}
