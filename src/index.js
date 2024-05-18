@@ -1,13 +1,8 @@
-// import "./styles.css";
-// import { screenController } from "./uiControls";
+// import * as List from "./List"
+import {createToDo} from "./Todo"
+import {create,getListbyId,deleteList,updateName} from "./List"
 
-// screenController();
-// import { create, getListbyId } from "./List";
+//<h2>imm check toDo here</h2>
+// const list = create("listOne");
+const todoOnelistOne = createToDo("Abhishek","1716028949444","","","")
 
-import { getListbyId,create } from "./List";
-// Call getListbyId function
-const list = getListbyId("1715875598653");
-console.log(list);
-
-// Call create function
-create("New List");

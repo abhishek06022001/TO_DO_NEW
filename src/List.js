@@ -38,4 +38,4 @@ const getIndexbyId = (listId)=> lists.findIndex((element)=>element.id === listId
 const getListbyId = (lisId)=> lists.find((listObject)=> listObject.id === lisId);
 
 // get index
-export {create,getListbyId,deleteList,updateName}
+export {create,getListbyId,deleteList,updateName,lists}
