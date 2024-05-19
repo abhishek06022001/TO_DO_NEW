@@ -6,7 +6,7 @@ function uiControl(){
     renderHomePage();
     const createProject = document.querySelector('#create_project');
     createProject.addEventListener('click', ()=>{
-        openModal();
+        openModal(undefined);
     })
 }
 function renderHomePage() {
@@ -19,15 +19,34 @@ function renderHomePage() {
 
     for (const element in lists) {
         const list = lists[element];
-        const button = document.createElement('button');
-        button.id = list.listId;
+        const button = document.createElement('span');
+        const editbutton = document.createElement('button');
+        editbutton.textContent="edit";
+        const deletebutton = document.createElement('button');
+        deletebutton.textContent="delete";
+        const sidebarChild = document.createElement('div');
+
+        const currListId = list.id;
+        // alert(currListId);
+        button.id = currListId;
         button.textContent = list.name;
         button.classList.add('list_button');
-        sidebar.appendChild(button);
+        sidebarChild.appendChild(button);
+        sidebarChild.appendChild(editbutton);
+        sidebarChild.appendChild(deletebutton);
+        sidebar.appendChild(sidebarChild);
+        editbutton.addEventListener('click',()=>{
+            
+            openModal(currListId);
+            // alert(currListId);
+        });
+        deletebutton.addEventListener('click', () => {
+
+        })
     }
 }
 
-function openModal() {
+function openModal(index) {
     const modal = document.createElement('div');
     const todoelement = document.querySelector('.todo_info');
     modal.classList.add('modal');
@@ -46,17 +65,24 @@ function openModal() {
         }
     };
     const createListButton = document.querySelector('.save_button');
-    createListButton.addEventListener('click', () => {
+        if(!index){
+            createListButton.addEventListener('click', () => {
+                const name = document.querySelector('.create_list_input').value;
+                Lists.create(name);
+                modal.style.display = 'none';
+                renderHomePage();
+
+            })
+        }else{
+    createListButton.addEventListener('click',()=>{
         const name = document.querySelector('.create_list_input').value;
-        // alert(name);
-        //create a list object and enter in lists 
-        Lists.create(name);
+        alert(index);
+        Lists.updateName(index,name);
         modal.style.display = 'none';
         renderHomePage();
-        // const sidebar = document.querySelector('sidebar_info');
-        // sidebar.appendChild();
+ 
     });
-  
-    // renderHomePage();
+        }
+
 }
 export{uiControl}
