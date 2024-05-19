@@ -10,9 +10,7 @@ import { saveToLocalStorage,getFromLocalStorage } from "./localStorage";
         todo , 
         completed
     }
-
  }
- //create
 const create = (name)=>{
     const list = List(name);
     lists.push(list);
@@ -24,18 +22,13 @@ const create = (name)=>{
     list.name = name; 
     saveToLocalStorage(lists);
 }
-
 const deleteList = (listid)=>{
-
     const index = getIndexbyId(listid);
     lists.splice(index,1);
     saveToLocalStorage(lists);
 }
-
- //delete
-//  getid 
 const getIndexbyId = (listId)=> lists.findIndex((element)=>element.id === listId);
 const getListbyId = (lisId)=> lists.find((listObject)=> listObject.id === lisId);
 
 // get index
-export {create,getListbyId,deleteList,updateName,lists}
+export { create, getListbyId, deleteList, updateName, lists, getIndexbyId }

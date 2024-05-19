@@ -26,10 +26,22 @@ const updateToDo = (id , name, listId, Description, Priority, Deadline) => {
     todo.Deadline = Deadline;
     saveToLocalStorage(lists);
 }
+const getIndexbyId =(listId , todoId)=>{
+    const targetlist = getListbyId(listId); 
+    const index = targetlist.todo.findIndex((element)=> element.id === todoId);
+    return index;
+}
 const getToDo = (listId , todoId)=>{
    const targetlist = getListbyId(listId); 
    const todo = targetlist.todo.find((element)=>element.id === todoId);
    return todo  ; 
 }
-export{createToDo,updateToDo}
+//delete Todo 
+const deleteToDo = (listid , id )=>{
+    const list = getListbyId(listid);
+    const index = getIndexbyId(listid,id);
+    list.todo.splice(index,1);
+    saveToLocalStorage(lists);
+}
+export { createToDo, updateToDo, getIndexbyId, getToDo, deleteToDo };
    

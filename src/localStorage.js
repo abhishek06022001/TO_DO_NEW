@@ -1,7 +1,7 @@
 import { get } from "lodash";
 
 const localStorageKey = "lists"; 
-function saveToLocalStorage(lists){
+function saveToLocalStorage(lists ,listid){
     localStorage.setItem(localStorageKey,JSON.stringify(lists));
 }
 function getFromLocalStorage(){
