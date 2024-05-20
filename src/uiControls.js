@@ -13,9 +13,7 @@ function clearTodo(){
     const todoelement = document.querySelector('.todo_info');
     todoelement.textContent = "";
 }
-//createTodo 
-function createToDoModal(currListId){
-   
+function createToDoModal(currListId,todoId){
         const modal = document.createElement('div');
         const todoelement = document.querySelector('.todo_info');
         modal.classList.add('modal');
@@ -33,31 +31,31 @@ function createToDoModal(currListId){
                 modal.style.display = 'none';
             }
         };
-
+        if(!todoId){
         saveListButton.addEventListener('click',()=>{
-            // alert(nameinput.textContent);
             Todo.createToDo(nameinput.value,currListId,);
             renderHomePage();
-        })
-
-
+        })}else{
+            saveListButton.addEventListener('click',()=>{
+                Todo.updateToDo(todoId,nameinput.value,currListId,);
+                // renderHomePage();
+                clearTodo();
+                renderTodo(currListId);
+            })
+        }
  }
-
-
-
 function renderTodo(currListId){
     // alert(id);
     const list = Lists.getListbyId(currListId);
     console.log(list);
-    
-
     const todoelement = document.querySelector('.todo_info');
     const todo = list.todo;
     for (const x in todo) {
         const tododiv = document.createElement('div');
-        
         const text = document.createElement('h6');
         text.textContent= todo[x].name;
+        const todo_id = todo[x].id;
+        // alert(i)
         // alert(todo[x].name);
         const todoedit = document.createElement('button');
         const todohidden = document.createElement('button');
@@ -70,7 +68,17 @@ function renderTodo(currListId){
         tododiv.appendChild(text);
         tododiv.appendChild(todoedit);
         tododiv.appendChild(tododelete);
+        tododiv.classList.add('todo-item');
         // tododiv.appendChild(todoedit);
+        tododelete.addEventListener('click', (event) => {
+
+            Todo.deleteToDo(currListId, todo_id);
+            // Remove the todo item from the DOM
+            event.target.closest('.todo-item').remove();
+        });
+        todoedit.addEventListener('click', ()=>{
+            createToDoModal(currListId,todo_id);
+        })
 
 
         todoelement.appendChild(tododiv);
@@ -103,7 +111,7 @@ function renderHomePage() {
         const sidebarChild = document.createElement('div');
 
         const currListId = list.id;
-        // alert(currListId);
+        
         button.id = currListId;
         button.textContent = list.name;
         button.classList.add('list_button');
@@ -123,7 +131,7 @@ function renderHomePage() {
             // alert(currListId);
         });
         deletebutton.addEventListener('click', () => {
-            alert(currListId);
+            
                Lists.deleteList(currListId);
                renderHomePage();
         })
@@ -158,7 +166,7 @@ function openModal(index) {
 
             })
         }else{
-    createListButton.addEventListener('click',()=>{
+         createListButton.addEventListener('click',()=>{
         const name = document.querySelector('.create_list_input').value;
         // alert(index);
         Lists.updateName(index,name);
