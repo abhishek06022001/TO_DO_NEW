@@ -80,9 +80,7 @@ function renderTodo(currListId){
             createToDoModal(currListId,todo_id);
         })
 
-
         todoelement.appendChild(tododiv);
-
 
     }
     const createButton = document.createElement('button');
