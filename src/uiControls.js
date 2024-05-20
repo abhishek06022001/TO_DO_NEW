@@ -75,6 +75,7 @@ function renderTodo(currListId){
             Todo.deleteToDo(currListId, todo_id);
             // Remove the todo item from the DOM
             event.target.closest('.todo-item').remove();
+            
         });
         todoedit.addEventListener('click', ()=>{
             createToDoModal(currListId,todo_id);
